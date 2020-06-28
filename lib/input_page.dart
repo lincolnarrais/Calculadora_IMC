@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'constants.dart';
 import 'gender_card_content.dart';
 import 'reusable_card.dart';
+import 'round_icon_button.dart';
 
 enum Gender {
   MALE,
@@ -17,7 +18,9 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
-  int height = 160;
+  int height = 180;
+  int weight = 60;
+  int age = 35;
 
   @override
   Widget build(BuildContext context) {
@@ -122,10 +125,112 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: ReusableCard(),
+                  child: ReusableCard(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'PESO',
+                          style: kLabelStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: <Widget>[
+                            Text(
+                              weight.toString(),
+                              style: kNumberStyle,
+                            ),
+                            Text(
+                              'kg',
+                              style: kLabelStyle,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (weight > 0) {
+                                    weight--;
+                                  }
+                                });
+                              },
+                              icon: FontAwesomeIcons.minus,
+                            ),
+                            SizedBox(width: 10),
+                            RoundIconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (weight < 600) {
+                                    weight++;
+                                  }
+                                });
+                              },
+                              icon: FontAwesomeIcons.plus,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(),
+                  child: ReusableCard(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'IDADE',
+                          style: kLabelStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: <Widget>[
+                            Text(
+                              age.toString(),
+                              style: kNumberStyle,
+                            ),
+                            Text(
+                              age > 1 ? ' anos' : ' ano',
+                              style: kLabelStyle,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (age > 0) {
+                                    age--;
+                                  }
+                                });
+                              },
+                              icon: FontAwesomeIcons.minus,
+                            ),
+                            SizedBox(width: 10),
+                            RoundIconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (age < 130) {
+                                    age++;
+                                  }
+                                });
+                              },
+                              icon: FontAwesomeIcons.plus,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
