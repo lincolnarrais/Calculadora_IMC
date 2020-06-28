@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'constants.dart';
 import 'gender_card_content.dart';
 import 'reusable_card.dart';
 
@@ -9,21 +10,14 @@ enum Gender {
   FEMALE,
 }
 
-const Color activeCardColor = Color(0xFF1D1E33);
-const Color inactiveCardColor = Color(0xFF111328);
-const double bottomContainerHeight = 80;
-const Color bottomContainerColor = Color(0xFFEB1555);
-
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleCardColor = inactiveCardColor;
-  Color femaleCardColor = inactiveCardColor;
-
   Gender selectedGender;
+  int height = 160;
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +41,8 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                     color: selectedGender == Gender.MALE
-                        ? maleCardColor = activeCardColor
-                        : maleCardColor = inactiveCardColor,
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
                     child: GenderCardContent(
                       iconData: FontAwesomeIcons.mars,
                       label: 'HOMEM',
@@ -65,8 +59,8 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                     color: selectedGender == Gender.FEMALE
-                        ? femaleCardColor = activeCardColor
-                        : femaleCardColor = inactiveCardColor,
+                        ? kActiveCardColor
+                        : kInactiveCardColor,
                     child: GenderCardContent(
                       iconData: FontAwesomeIcons.venus,
                       label: 'MULHER',
@@ -77,7 +71,44 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            child: ReusableCard(),
+            child: ReusableCard(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'ALTURA',
+                    style: kLabelStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        height.toString(),
+                        style: kNumberStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: kLabelStyle,
+                      ),
+                    ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    min: 120,
+                    max: 220,
+                    activeColor: kBottomContainerColor,
+                    inactiveColor: Color(0xFF8D8E98),
+                    onChanged: (double newVaue) {
+                      setState(() {
+                        height = newVaue.round();
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: Row(
@@ -93,9 +124,9 @@ class _InputPageState extends State<InputPage> {
           ),
           Container(
             margin: EdgeInsets.only(top: 15),
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
             width: double.infinity,
-            color: bottomContainerColor,
+            color: kBottomContainerColor,
             child: Center(
               child: Text(
                 'CALCULAR',

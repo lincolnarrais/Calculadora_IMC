@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const Color cardDefaultColor = Color(0xFF1D1E33);
+import 'constants.dart';
 
 class ReusableCard extends StatelessWidget {
   final Color color;
@@ -8,7 +8,7 @@ class ReusableCard extends StatelessWidget {
   final Function onTap;
 
   ReusableCard({
-    this.color = cardDefaultColor,
+    this.color = kActiveCardColor,
     this.child,
     this.onTap,
   });
@@ -19,6 +19,7 @@ class ReusableCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.all(15),
+        width: double.infinity,
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(10),
