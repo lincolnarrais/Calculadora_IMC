@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'constants.dart';
 import 'gender_card_content.dart';
+import 'results_page.dart';
 import 'reusable_card.dart';
 import 'round_icon_button.dart';
 
@@ -26,7 +27,7 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CALCULADOR DE IMC'),
+        title: Text('CALCULADORA DE IMC'),
         centerTitle: true,
       ),
       body: Column(
@@ -235,17 +236,27 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 15),
-            height: kBottomContainerHeight,
-            width: double.infinity,
-            color: kBottomContainerColor,
-            child: Center(
-              child: Text(
-                'CALCULAR',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultsPage(),
+                ),
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.only(top: 10),
+              height: kBottomContainerHeight,
+              width: double.infinity,
+              color: kBottomContainerColor,
+              child: Center(
+                child: Text(
+                  'CALCULAR',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
