@@ -5,6 +5,16 @@ import '../components/large_pink_bottom_button.dart';
 import '../components/reusable_card.dart';
 
 class ResultsPage extends StatelessWidget {
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
+
+  const ResultsPage({
+    @required this.bmiResult,
+    @required this.resultText,
+    @required this.interpretation,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,9 +27,13 @@ class ResultsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
-            child: Text(
-              'Seu Resultado',
-              style: kTitleTextStyle,
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                'Seu Resultado',
+                style: kTitleTextStyle,
+              ),
             ),
           ),
           Expanded(
@@ -30,15 +44,27 @@ class ResultsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'NORMAL',
+                    resultText,
                     style: kResultTextStyle,
                   ),
-                  Text(
-                    '18.3',
-                    style: kBMITextStyle,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        bmiResult,
+                        style: kBMITextStyle,
+                      ),
+                      Text(
+                        'kg/m²',
+                        style: kLabelStyle,
+                      ),
+                    ],
                   ),
                   Text(
-                    'Seu IMC é normal. Continue assim!',
+                    interpretation,
+                    textAlign: TextAlign.center,
                     style: kBodyTextStyle,
                   ),
                 ],
